@@ -1,15 +1,17 @@
 // import './App.css';
+import HomePage from './components/HomePage';
+import NotesContextProvider from './notesContext/notesContext';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
+    <div className='App'>
+      <NotesContextProvider>
+        <header className='App-header'>
+          <HomePage />
+        </header>
+      </NotesContextProvider>
     </div>
   );
-}
+};
 
 export default App;

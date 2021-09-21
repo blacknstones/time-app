@@ -7,7 +7,8 @@ const createNote = async (req, res) => {
             title: req.body.title,
             content: req.body.content,
             category: req.body.category,
-            receiveAt: req.body.receiveAt
+            receiveAt: req.body.receiveAt,
+            opened: req.body.opened
         })
 
         const newNote = await note.save();

@@ -17,7 +17,11 @@ const NoteSchema = new Schema({
     receiveAt: {
         type: Date,
         required: true,
-    }   
+    },
+    opened: {
+        type: Boolean,
+        required: true,
+    }
 },{ timestamps: true })
 
 export default model('Note', NoteSchema);
