@@ -20,8 +20,19 @@ const createNote = async (req, res) => {
     } catch(err) {
         console.log(err);
         res.status(500).send(err);
-
     }
 }
 
-export {createNote};
+const getNotes = async (req, res) => {
+    try {
+        const notes = await Note.find();
+        res.status(201).json({
+            notes
+        })
+
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
+
+export {createNote, getNotes};
