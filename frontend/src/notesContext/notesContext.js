@@ -1,38 +1,54 @@
-import { useContext, createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
-const notesContext = createContext();
+const url = 'http://localhost:4000';
 
-const NotesContextProvider = ({ children }) => {
-  const [data, setData] = useState([{title: 'fake note'}]);
-  const [isLoading, setIsLoading] = useState(false);
+export const NotesContext = createContext();
 
-{/* useEffect(() => {
-    let url = '/';
+export const NotesContextProvider = ({ children }) => {
+  const [notes, setNotes] = useState( [] );
+  const [isLoading, setIsLoading] = useState(true);
+
+  const createNote = (note) => {
+    setIsLoading(true);
+    axios.post(url, note).then(response => {
+      console.log(response.data);
+      setNotes(response.data.notes);
+      setIsLoading(false);
+    })
+  }
+
+  useEffect(() => {
+  
+    // setIsLoading(true);
     axios
       .get(url)
       .then(response => {
-        setData(response.data.notes);
+        setNotes(response.data.notes);
         setIsLoading(false);
-        console.log(response.data.notes);
+        console.log('in context', response.data.notes);
       })
       .catch(error => console.log(error));
-  }, []); */}
+  }, []);
 
 
   return (
-    <NotesContextProvider value={{ data, isLoading }}>
+    <NotesContext.Provider value={{
+      notes,
+      isLoading,
+      createNote
+    }}>
       {children}
-    </NotesContextProvider>
+    </NotesContext.Provider>
   );
 };
 
-export default NotesContextProvider;
+// export default NotesContextProvider;
 
-export const useNoteAPI = () => {
-  const context = useContext(notesContext);
-  if (context === undefined) {
-    throw new Error('Context must be used within a Provider');
-  }
-  return context;
-};
+// export const useNoteAPI = () => {
+//   const context = useContext(NotesContext);
+//   if (context === undefined) {
+//     throw new Error('Context must be used within a Provider');
+//   }
+//   return context;
+// };

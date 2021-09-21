@@ -1,16 +1,18 @@
 // import './App.css';
-import HomePage from './components/HomePage';
-import NotesContextProvider from './notesContext/notesContext';
+import Notes from './components/Notes';
+import { NotesContextProvider } from './notesContext/notesContext';
+import Form from './components/Form';
 
 const App = () => {
   return (
-    <div className='App'>
-      <NotesContextProvider>
-        <header className='App-header'>
-          <HomePage />
-        </header>
+    <NotesContextProvider>
+        <div className='App'>
+          <header className='App-header'>
+            <Notes />
+          </header>
+          <Form />
+        </div>
       </NotesContextProvider>
-    </div>
   );
 };
 

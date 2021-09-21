@@ -12,10 +12,12 @@ const createNote = async (req, res) => {
         })
 
         const newNote = await note.save();
+        const notes = await Note.find();
 
         res.status(201).json({
             message: 'New note created',
-            note: newNote
+            note: newNote,
+            notes: notes,
         })
 
     } catch(err) {
