@@ -4,7 +4,8 @@ import { NotesContext } from '../notesContext/notesContext';
 const Form = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [category, setCategory] = useState(undefined);
+  const [category, setCategory] = useState('');
+  const [categories, setCategories] = useState([])
   const [receiveAt, setReceiveAt] = useState(undefined);
 
   const { createNote } = useContext(NotesContext);
@@ -14,7 +15,7 @@ const Form = () => {
     const note = {
       title,
       content,
-      category,
+      category: categories,
       receiveAt,
       opened: false,
     };
@@ -26,9 +27,20 @@ const Form = () => {
     setReceiveAt('');
   };
 
+  const testFunction = () => {
+    console.log('category to add', category);
+    if (categories.length > 0) {
+      setCategories([...categories, category]);
+      setCategory('');
+      return;
+    }
+    setCategories([category]);
+    setCategory('');
+  }
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <input
           name='title'
           type='text'
@@ -49,9 +61,14 @@ const Form = () => {
           name='category'
           type='text'
           value={category}
-          placeholder='category'
+          placeholder='category (press enter to add)'
           required
           onChange={e => setCategory(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              testFunction();
+            }
+          }}
         />
         <input
           name='receiveAt'
@@ -60,7 +77,7 @@ const Form = () => {
           required
           onChange={e => setReceiveAt(e.target.value)}
         />
-        <button type='submit'>Submit</button>
+        <button type='button' onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   );

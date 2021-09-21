@@ -20,7 +20,7 @@ export const NotesContextProvider = ({ children }) => {
 
   useEffect(() => {
   
-    // setIsLoading(true);
+    setIsLoading(true);
     axios
       .get(url)
       .then(response => {
@@ -42,13 +42,3 @@ export const NotesContextProvider = ({ children }) => {
     </NotesContext.Provider>
   );
 };
-
-// export default NotesContextProvider;
-
-// export const useNoteAPI = () => {
-//   const context = useContext(NotesContext);
-//   if (context === undefined) {
-//     throw new Error('Context must be used within a Provider');
-//   }
-//   return context;
-// };
