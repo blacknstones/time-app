@@ -6,18 +6,20 @@ const Form = () => {
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([])
-  const [receiveAt, setReceiveAt] = useState(undefined);
+  const [receiveAt, setReceiveAt] = useState('');
 
   const { createNote } = useContext(NotesContext);
 
   const handleSubmit = e => {
     e.preventDefault();
+    // const receiveAtArray = receiveAt.split(/[\-:T]/g);
     const note = {
       title,
       content,
       category: categories,
       receiveAt,
       opened: false,
+      // receiveAtArray: receiveAtArray
     };
     console.log('note', note);
     createNote(note);
@@ -27,7 +29,7 @@ const Form = () => {
     setReceiveAt('');
   };
 
-  const testFunction = () => {
+  const addCategory = () => {
     console.log('category to add', category);
     if (categories.length > 0) {
       setCategories([...categories, category]);
@@ -66,7 +68,7 @@ const Form = () => {
           onChange={e => setCategory(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              testFunction();
+              addCategory();
             }
           }}
         />

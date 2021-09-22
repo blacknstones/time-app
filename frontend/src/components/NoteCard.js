@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { NotesContext } from '../notesContext/notesContext';
+import '../styles/notecard.scss'
 
 const NoteCard = ({ note }) => {
   const { deleteNote } = useContext(NotesContext);
@@ -7,8 +8,8 @@ const NoteCard = ({ note }) => {
   return (
     <>
       {Date.now() > Date.parse(note.receiveAt) && 
-        <div>
-          <h3>Title: {note.title}</h3>
+        <div className="notecard">
+          <h3 className="heading">Title: {note.title}</h3>
           <p>ID: {note._id}</p>
           <p>Content: {note.content}</p>
           <p>Category:</p>

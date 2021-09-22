@@ -2,36 +2,22 @@ import Note from '../models/noteModel.js';
 import nodemailer from 'nodemailer';
 import cron from 'node-cron'
 
-// Message Options
-const mailOptions = {
-  from: process.env.PERSONAL_EMAIL,
-  to: process.env.PERSONAL_EMAIL,
-  subject: 'You have a new note in the Time App',
-  text: 'Open your Time App to view the note you sent to yourself',
-}
+// // Message Options
+// const mailOptions = {
+//   from: process.env.PERSONAL_EMAIL,
+//   to: process.env.PERSONAL_EMAIL,
+//   subject: 'You have a new note in the Time App',
+//   text: 'Open your Time App to view the note you sent to yourself',
+// }
 
-// Transport configuration
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.PERSONAL_EMAIL,
-    pass: process.env.PERSONAL_PASSWORD,
-  }
-})
-
-// // send email
-// transporter.sendMail(mailOptions, (err, info) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log('Email sent: ', info.response);
+// // Transport configuration
+// const transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: process.env.PERSONAL_EMAIL,
+//     pass: process.env.PERSONAL_PASSWORD,
 //   }
 // })
-
-// schedule (seconds, minutes, hours, day of month, month, day of week, OPTIONAL YEAR)
-// cron.schedule('* * * * * *', () => {
-//     console.log('email sent');
-//   })
 
 const createNote = async (req, res) => {
     try {
@@ -44,16 +30,34 @@ const createNote = async (req, res) => {
             opened: req.body.opened
         })
 
-        console.log('NOTE', req.body);
+        const newNote = await note.save();
+        const notes = await Note.find();
 
-        // const newNote = await note.save();
-        // const notes = await Note.find();
+        // schedule (second, minute, hour, day of month, month, day of week, OPTIONAL YEAR)
+        // const year = req.body.receiveAtArray[0];
+        // const month = req.body.receiveAtArray[1];
+        // const day = req.body.receiveAtArray[2];
+        // const hour = req.body.receiveAtArray[3];
+        // const minute = req.body.receiveAtArray[4];
+        // console.log('year:', year, 'month:', month, 'day:', day, 'hour:', hour, 'minute:', minute);
 
-        // res.status(201).json({
-        //     message: 'New note created',
-        //     note: newNote,
-        //     notes: notes,
-        // })
+        // cron.schedule('* * * * * *', () => {
+        //     console.log('email sent');
+        //     // send email
+        //     transporter.sendMail(mailOptions, (err, info) => {
+        //         if (err) {
+        //         console.log(err);
+        //         } else {
+        //         console.log('Email sent: ', info.response);
+        //         }
+        //     })
+        // })  
+
+        res.status(201).json({
+            message: 'New note created',
+            note: newNote,
+            notes: notes,
+        })
 
     } catch(err) {
         console.log(err);

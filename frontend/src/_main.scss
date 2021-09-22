@@ -1,0 +1,15 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Rozha+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+$header-font: 'Rozha One', serif;
+$body-font: 'Questrial', sans-serif;
+
+$sub-heading: 2rem;
+
+// Colours
+$light-green: #B2D2A4;
+
+p, h3 {
+    font-family: $body-font;
+}

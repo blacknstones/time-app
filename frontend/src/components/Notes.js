@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import { NotesContext } from '../notesContext/notesContext';
 import NoteCard from './NoteCard';
+import '../styles/notes.scss';
 
 const Notes = () => {
   const { notes, isLoading } = useContext(NotesContext);
@@ -19,13 +20,13 @@ const Notes = () => {
   }, [isLoading]);
 
   return (
-    <div>
-      <h1>Notes to self</h1>
-      <p>Your future notes : {unreadNotes}</p>
+    <div className="notes">
+      <h1 className="notes__title">Notes to self</h1>
+      <h3 className="notes__total">Your future notes : {unreadNotes}</h3>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div>
+        <div className="notes__container">
           {notes && notes.map((note, i) => <NoteCard key={i} note={note} />)}
         </div>
       )}

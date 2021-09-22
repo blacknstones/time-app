@@ -1,0 +1,16 @@
+@import '../main';
+
+.notes__title {
+    font-family: $header-font;
+    text-align: center;
+    font-size: 5rem;
+}
+
+.notes__total {
+    text-align: center;
+    font-size: $sub-heading;
+}
+
+.notes__container {
+    display: flex;
+}
