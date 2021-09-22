@@ -16,10 +16,15 @@ export const NotesContextProvider = ({ children }) => {
       setNotes(response.data.notes);
       setIsLoading(false);
     })
-  }
+  };
+
+  const deleteNote = (id) => {
+    axios.delete(url, { data: { _id: id} });
+    // Should I add something here for a response?
+    window.location.reload(true);
+  };
 
   useEffect(() => {
-  
     setIsLoading(true);
     axios
       .get(url)
@@ -36,7 +41,8 @@ export const NotesContextProvider = ({ children }) => {
     <NotesContext.Provider value={{
       notes,
       isLoading,
-      createNote
+      createNote,
+      deleteNote
     }}>
       {children}
     </NotesContext.Provider>

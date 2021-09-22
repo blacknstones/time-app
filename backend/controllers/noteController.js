@@ -26,6 +26,16 @@ const createNote = async (req, res) => {
     }
 }
 
+const deleteNote = async (req, res) => {
+    try {
+        // console.log('in noteController, id to delete:', req.body._id);
+        await Note.deleteOne({ _id: req.body._id });
+        res.status(200);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
+
 const getNotes = async (req, res) => {
     try {
         const notes = await Note.find();
@@ -38,4 +48,4 @@ const getNotes = async (req, res) => {
     }
 }
 
-export {createNote, getNotes};
+export {createNote, deleteNote, getNotes};
