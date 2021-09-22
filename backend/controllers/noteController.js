@@ -1,4 +1,37 @@
 import Note from '../models/noteModel.js';
+import nodemailer from 'nodemailer';
+import cron from 'node-cron'
+
+// Message Options
+const mailOptions = {
+  from: process.env.PERSONAL_EMAIL,
+  to: process.env.PERSONAL_EMAIL,
+  subject: 'You have a new note in the Time App',
+  text: 'Open your Time App to view the note you sent to yourself',
+}
+
+// Transport configuration
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.PERSONAL_EMAIL,
+    pass: process.env.PERSONAL_PASSWORD,
+  }
+})
+
+// // send email
+// transporter.sendMail(mailOptions, (err, info) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log('Email sent: ', info.response);
+//   }
+// })
+
+// schedule (seconds, minutes, hours, day of month, month, day of week, OPTIONAL YEAR)
+// cron.schedule('* * * * * *', () => {
+//     console.log('email sent');
+//   })
 
 const createNote = async (req, res) => {
     try {
@@ -11,14 +44,16 @@ const createNote = async (req, res) => {
             opened: req.body.opened
         })
 
-        const newNote = await note.save();
-        const notes = await Note.find();
+        console.log('NOTE', req.body);
 
-        res.status(201).json({
-            message: 'New note created',
-            note: newNote,
-            notes: notes,
-        })
+        // const newNote = await note.save();
+        // const notes = await Note.find();
+
+        // res.status(201).json({
+        //     message: 'New note created',
+        //     note: newNote,
+        //     notes: notes,
+        // })
 
     } catch(err) {
         console.log(err);
