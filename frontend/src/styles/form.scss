@@ -10,3 +10,29 @@
     flex-direction: column;
     margin: auto;
 }
+
+form > input, textarea, button {
+    border: 1px solid black;
+    margin-bottom: 1rem;
+    padding: 0.25rem;
+}
+
+.form__input--highlight:focus {
+    outline: none;
+    border: 1px solid $pink;
+}
+
+.form__btn {
+    background-color: transparent;
+    font-size: 150%;
+}
+
+.form__btn:hover {
+    box-shadow: 10px 10px;
+}
+
+.form__btn:active {
+    transform: translateY(4px);
+    box-shadow: 6px 6px;
+    background-color: $turquoise;
+}

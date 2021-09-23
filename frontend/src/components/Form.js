@@ -45,6 +45,7 @@ const Form = () => {
     <div className="form">
       <form className="form__form">
         <input
+          className="form__input--highlight"
           name='title'
           type='text'
           value={title}
@@ -53,6 +54,7 @@ const Form = () => {
           onChange={e => setTitle(e.target.value)}
         />
         <textarea
+          className="form__input--highlight"
           name='content'
           type='text'
           value={content}
@@ -61,6 +63,7 @@ const Form = () => {
           onChange={e => setContent(e.target.value)}
         />
         <input
+          className="form__input--highlight"
           name='category'
           type='text'
           value={category}
@@ -75,13 +78,14 @@ const Form = () => {
         />
         {categories.length > 0 && <p>{categories.join(', ')}</p>}
         <input
+          className="form__input--highlight"
           name='receiveAt'
           type='datetime-local'
           value={receiveAt}
           required
           onChange={e => setReceiveAt(e.target.value)}
         />
-        <button type='button' onClick={handleSubmit}>Submit</button>
+        <button className="form__btn" type="button" onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   );

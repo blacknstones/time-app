@@ -7,9 +7,13 @@ $body-font: 'Questrial', sans-serif;
 
 $sub-heading: 2rem;
 
-// Colours
-$light-green: #B2D2A4;
-
-p, h3 {
+p, h3, input, textarea, button {
     font-family: $body-font;
 }
+
+// Colours
+$purple: #9B5DE5;
+$pink: #F15BB5;
+$yellow: #FEE440;
+$blue: #00BBF9;
+$turquoise: #00F5D4;
