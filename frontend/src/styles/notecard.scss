@@ -7,6 +7,20 @@
     padding: 1rem;
 }
 
-.heading {
-    font-family: $body-font;
+.notecard > * {
+    margin-bottom: 0.75rem;
+}
+
+.notecard__btn {
+    background-color: transparent;
+}
+
+.notecard__btn:hover {
+    box-shadow: 4px 4px;
+}
+
+.notecard__btn:active {
+    background-color: $pink;
+    box-shadow: 2px 2px;
+    transform: translateY(2px);
 }

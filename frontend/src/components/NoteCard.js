@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { NotesContext } from '../notesContext/notesContext';
 import '../styles/notecard.scss'
+import { motion } from 'framer-motion';
 
 const NoteCard = ({ note }) => {
   const { deleteNote } = useContext(NotesContext);
@@ -8,15 +9,27 @@ const NoteCard = ({ note }) => {
   return (
     <>
       {Date.now() > Date.parse(note.receiveAt) && 
-        <div className="notecard">
-          <h3 className="heading">Title: {note.title}</h3>
-          <p>ID: {note._id}</p>
-          <p>Content: {note.content}</p>
+        <motion.div
+          className="notecard"
+          // initial={{ opacity: 0 }}
+          // animate={{ opacity: 1 }}
+          // transition={{ delay: 0.25 }} 
+        >
+          <h3>{note.title}</h3>
+          {/* <p>ID: {note._id}</p> */}
+          <p>{note.content}</p>
           <p>Category:</p>
           {note.category.map((category, i) => <p key={i}>{category}</p>)}
           <p>{note.receiveAt}</p>
-          <button onClick={() => deleteNote(note._id)}>Delete note</button>
-        </div>
+          <motion.button
+            className="notecard__btn"
+            onClick={() => deleteNote(note._id)}
+            whileHover={{
+              scale: 1.1
+            }}
+            >Delete note
+          </motion.button>
+        </motion.div>
       }
       </>
    

@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { NotesContext } from '../notesContext/notesContext';
 import '../styles/form.scss';
+import { motion } from 'framer-motion';
 
 const Form = () => {
   const [title, setTitle] = useState('');
@@ -85,7 +86,15 @@ const Form = () => {
           required
           onChange={e => setReceiveAt(e.target.value)}
         />
-        <button className="form__btn" type="button" onClick={handleSubmit}>Submit</button>
+        <motion.button
+          className="form__btn"
+          type="button"
+          onClick={handleSubmit}
+          whileHover={{
+              scale: 1.1
+            }}
+          >Submit
+        </motion.button>
       </form>
     </div>
   );
