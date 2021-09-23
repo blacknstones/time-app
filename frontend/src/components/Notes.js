@@ -23,25 +23,26 @@ const Notes = () => {
 
   const containerVariants = {
     hidden: {
-      opacity: 0
+      opacity: 0,
     },
     visible: {
       opacity: 1,
       transition: {
         when: "beforeChildren",
-        staggerChildren: 0.1
+        staggerChildren: 0.2,
       }
     }
   }
 
   const childVariants = {
     hidden: {
-      opacity: 0
+      x: -2000,
     },
     visible: {
-      opacity: 1,
+      x: 0,
       transition: {
-        duration: 0.5
+        type: 'spring',
+        bounce: 0.1
       }
     }
   }
@@ -58,7 +59,7 @@ const Notes = () => {
           initial="hidden"
           animate="visible"
           className="notes__container">
-          {notes && notes.map((note, i) => <motion.div variants={childVariants}><NoteCard key={i} note={note} /></motion.div>)}
+          {notes && notes.map((note, i) => <motion.div key={i} variants={childVariants}><NoteCard note={note} /></motion.div>)}
         </motion.div>
       )}
     </div>

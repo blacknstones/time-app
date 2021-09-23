@@ -9,14 +9,8 @@ const NoteCard = ({ note }) => {
   return (
     <>
       {Date.now() > Date.parse(note.receiveAt) && 
-        <motion.div
-          className="notecard"
-          // initial={{ opacity: 0 }}
-          // animate={{ opacity: 1 }}
-          // transition={{ delay: 0.25 }} 
-        >
+        <div className="notecard">
           <h3>{note.title}</h3>
-          {/* <p>ID: {note._id}</p> */}
           <p>{note.content}</p>
           <p>Category:</p>
           {note.category.map((category, i) => <p key={i}>{category}</p>)}
@@ -29,11 +23,9 @@ const NoteCard = ({ note }) => {
             }}
             >Delete note
           </motion.button>
-        </motion.div>
+        </div>
       }
       </>
-   
-    
   );
 };
 

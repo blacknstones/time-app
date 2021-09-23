@@ -91,8 +91,8 @@ const Form = () => {
           type="button"
           onClick={handleSubmit}
           whileHover={{
-              scale: 1.1
-            }}
+            scale: 1.1
+          }}
           >Submit
         </motion.button>
       </form>
