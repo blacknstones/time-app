@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { NotesContext } from '../notesContext/notesContext';
+import '../styles/form.scss';
 
 const Form = () => {
   const [title, setTitle] = useState('');
@@ -41,8 +42,8 @@ const Form = () => {
   }
 
   return (
-    <div>
-      <form>
+    <div className="form">
+      <form className="form__form">
         <input
           name='title'
           type='text'
@@ -72,6 +73,7 @@ const Form = () => {
             }
           }}
         />
+        {categories.length > 0 && <p>{categories.join(', ')}</p>}
         <input
           name='receiveAt'
           type='datetime-local'
