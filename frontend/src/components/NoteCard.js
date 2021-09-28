@@ -5,6 +5,9 @@ import { motion } from 'framer-motion';
 
 const NoteCard = ({ note }) => {
   const { deleteNote } = useContext(NotesContext);
+  console.log('in notecard. Date to receive:', note.receiveAt, 'Parsed date:', Date.parse(note.receiveAt), 'Date now', Date.now());
+  const difference = Date.now() - Date.parse(note.receiveAt);
+  console.log('the difference:', difference);
 
   return (
     <>
@@ -14,7 +17,6 @@ const NoteCard = ({ note }) => {
           <p>{note.content}</p>
           <p>Category:</p>
           {note.category.map((category, i) => <p key={i}>{category}</p>)}
-          <p>{note.receiveAt}</p>
           <motion.button
             className="notecard__btn"
             onClick={() => deleteNote(note._id)}

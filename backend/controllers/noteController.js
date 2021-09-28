@@ -1,13 +1,13 @@
 import Note from '../models/noteModel.js';
 import nodemailer from 'nodemailer';
-import cron from 'node-cron'
+// import cron from 'node-cron'
 
 // // Message Options
 // const mailOptions = {
 //   from: process.env.PERSONAL_EMAIL,
 //   to: process.env.PERSONAL_EMAIL,
-//   subject: 'You have a new note in the Time App',
-//   text: 'Open your Time App to view the note you sent to yourself',
+//   subject: 'You have a new Note to Self',
+//   text: 'Open the link when it is eventually deployed to see your note',
 // }
 
 // // Transport configuration
@@ -19,7 +19,45 @@ import cron from 'node-cron'
 //   }
 // })
 
+// // Send email
+// transporter.sendMail(mailOptions, (err, info) => {
+//     if (err) {
+//     console.log(err);
+//     } else {
+//     console.log('Email sent: ', info.response);
+//     }
+// })
+
+// cron.schedule('* * * * * *', () => {
+//     console.log('email sent');
+//     // // send email
+//     // transporter.sendMail(mailOptions, (err, info) => {
+//     //     if (err) {
+//     //     console.log(err);
+//     //     } else {
+//     //     console.log('Email sent: ', info.response);
+//     //     }
+//     // })
+// }) 
+
 const createNote = async (req, res) => {
+    // Message Options
+    const mailOptions = {
+        from: process.env.PERSONAL_EMAIL,
+        to: process.env.PERSONAL_EMAIL,
+        subject: 'You have a new Note to Self',
+        text: `Your note will be visible on the ${req.body.receiveAt} when it is eventually deployed to to whatever website. Only then can you see your note`,
+    }
+    
+    // Transport configuration
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+        user: process.env.PERSONAL_EMAIL,
+        pass: process.env.PERSONAL_PASSWORD,
+        }
+    })
+
     try {
         console.log(req.body);
         const note = new Note({
@@ -28,6 +66,14 @@ const createNote = async (req, res) => {
             category: req.body.category,
             receiveAt: req.body.receiveAt,
             opened: req.body.opened
+        })
+        // // Send email
+        transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+            console.log(err);
+            } else {
+            console.log('Email sent: ', info.response);
+            }
         })
 
         const newNote = await note.save();
@@ -39,19 +85,7 @@ const createNote = async (req, res) => {
         // const day = req.body.receiveAtArray[2];
         // const hour = req.body.receiveAtArray[3];
         // const minute = req.body.receiveAtArray[4];
-        // console.log('year:', year, 'month:', month, 'day:', day, 'hour:', hour, 'minute:', minute);
-
-        // cron.schedule('* * * * * *', () => {
-        //     console.log('email sent');
-        //     // send email
-        //     transporter.sendMail(mailOptions, (err, info) => {
-        //         if (err) {
-        //         console.log(err);
-        //         } else {
-        //         console.log('Email sent: ', info.response);
-        //         }
-        //     })
-        // })  
+        // console.log('year:', year, 'month:', month, 'day:', day, 'hour:', hour, 'minute:', minute); 
 
         res.status(201).json({
             message: 'New note created',
