@@ -17,9 +17,9 @@ const Notes = () => {
     }
   }, [notes]);
 
-  useEffect(() => {
-    console.log('isLoading', isLoading);
-  }, [isLoading]);
+  // useEffect(() => {
+  //   console.log('isLoading', isLoading);
+  // }, [isLoading]);
 
   const containerVariants = {
     hidden: {

@@ -2,44 +2,6 @@ import Note from '../models/noteModel.js';
 import nodemailer from 'nodemailer';
 // import cron from 'node-cron'
 
-// // Message Options
-// const mailOptions = {
-//   from: process.env.PERSONAL_EMAIL,
-//   to: process.env.PERSONAL_EMAIL,
-//   subject: 'You have a new Note to Self',
-//   text: 'Open the link when it is eventually deployed to see your note',
-// }
-
-// // Transport configuration
-// const transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: process.env.PERSONAL_EMAIL,
-//     pass: process.env.PERSONAL_PASSWORD,
-//   }
-// })
-
-// // Send email
-// transporter.sendMail(mailOptions, (err, info) => {
-//     if (err) {
-//     console.log(err);
-//     } else {
-//     console.log('Email sent: ', info.response);
-//     }
-// })
-
-// cron.schedule('* * * * * *', () => {
-//     console.log('email sent');
-//     // // send email
-//     // transporter.sendMail(mailOptions, (err, info) => {
-//     //     if (err) {
-//     //     console.log(err);
-//     //     } else {
-//     //     console.log('Email sent: ', info.response);
-//     //     }
-//     // })
-// }) 
-
 const createNote = async (req, res) => {
     // Message Options
     const mailOptions = {
